@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="./css/style.css" rel="stylesheet"> -->
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      /* overflow-y: hidden; */
+    }
+
+    .main {
+      width: 100%;
+      padding: 10px;
+    }
+
+
+    .main-outer {
+      width: 100%;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .main-left {
+      width: 25%;
+    }
+
+    .main-left aside {
+      width: 100%;
+      /* height: 105%; */
+      background: #333;
+      padding: 20px 40px;
+    }
+
+    .main-left aside h3 {
+      color: #fff;
+      font-size: 26px;
+      letter-spacing: 1px;
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+
+    .main-left p {
+      margin-bottom: 13px;
+    }
+
+    .main-left label {
+      color: #fff;
+      display: block;
+      padding-bottom: 10px;
+    }
+
+    .main-left aside button {
+      background: #fff;
+      border: none;
+      height: 35px;
+      padding: 0 26px;
+      font-size: 15px;
+      color: #000;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .slider {
+      border: 1px solid red;
+      -webkit-appearance: none;
+      width: 100%;
+      height: 13px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      border: none;
+      opacity: 0.7;
+      -webkit-transition: 0.2s;
+      transition: opacity 0.2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #4caf50;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #4caf50;
+      cursor: pointer;
+    }
+
+    .main-right {
+      width: 70%;
+    }
+
+    .main-right .img-area {
+      width: 100%;
+      height: 91vh;
+      overflow: hidden;
+    }
+
+    .main-right .img-area img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #myform {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .main-right input[type="text"] {
+      width: 79%;
+      margin-bottom: 20px;
+      height: 45px;
+      padding: 10px;
+    }
+
+    .main-right button {
+      background: #333;
+      border: none;
+      height: 45px;
+      padding: 0 26px;
+      font-size: 15px;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="main">
+    <div class="main-outer">
+      <div class="main-left">
+        <aside>
+          <h3>Image Filters</h3>
+          <form id="slider-form">
+            <p>
+              <label for="gs">Grayscale</label>
+              <input id="gs" name="gs" type="range" min="" max="100" value="0" class="slider">
+            </p>
+
+            <p>
+              <label for="blur">Blur</label>
+              <input id="blur" name="blur" type="range" min="0" max="" value="0" class="slider">
+            </p>
+
+            <p>
+              <label for="hue-rotate">Hue-Rotate</label>
+              <input id="hue-rotate" name="hue-rotate" type="range" min="0" max="" value="0" class="slider">
+            </p>
+
+            <p>
+              <label for="sepia">Sepia</label>
+              <input id="sepia" name="sepia" type="range" min="0" max="" value="0" class="slider">
+            </p>
+
+            <p></p>
+            <label for="brightness">Brightness</label>
+            <input id="brightness" name="brightness" type="range" min="0" max="200" value="100" class="slider">
+            </p>
+
+            <p>
+              <label for="saturation">Saturation</label>
+              <input id="saturation" name="saturation" type="range" min="0" max="200" value="100" class="slider">
+            </p>
+
+            <p>
+              <label for="invert">Invert value</label>
+              <input id="invert" name="invert" type="range" min="0" max="100" value="0" class="slider">
+            </p>
+            <p>
+              <label for="resize">Resize</label>
+              <input id="resize" name="resize" type="range" min="0" max="" value="100" class="slider">
+            </p>
+
+            <button type="reset">Reset</button>
+          </form>
+        </aside>
+      </div>
+      <div class="main-right">
+        <form id="myform">
+          <input type="text" placeholder="Image URL" id="onlineurl">
+          <button type="submit">Change Image</button>
+        </form>
+        <div class="img-area">
+          <a href="https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            download="image.jpg" id="downloadlink" target="_blank">
+            <img
+              src="https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              id="targetimage" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- <script src="js/main.js"></script> -->
+  <script>
+    let myform = document.getElementById('myform');
+    let targetimage = document.getElementById('targetimage');
+    let downloadlink = document.getElementById('downloadlink');
+    let inputrange = document.querySelectorAll('.slider');
+
+    myform.addEventListener('submit', function (e) {
+      let urlimage = document.getElementById('onlineurl');
+      let urlimageval = urlimage.value;
+      if (urlimageval.length) {
+        downloadlink.setAttribute('href', urlimageval);
+        targetimage.setAttribute('src', urlimageval);
+
+        urlimage.value = '';
+      }
+
+      e.preventDefault();
+      console.log('done');
+      console.log(document.getElementById('downloadlink'));
+      console.log(document.getElementById('targetimage'));
+
+    });
+
+    for (let i = 0; i <= inputrange.length - 1; i++) {
+      inputrange[i].addEventListener('input', editimage);
+    }
+
+    function editimage() {
+      let gs = document.getElementById('gs');
+      let blur = document.getElementById('blur');
+      let huerotate = document.getElementById('hue-rotate');
+      let sepia = document.getElementById('sepia');
+      let resize = document.getElementById('resize');
+      let brightness = document.getElementById('brightness');
+      let saturation = document.getElementById('saturation');
+      let invert = document.getElementById('invert');
+
+      let gsval = gs.value;
+      let blurval = blur.value;
+      let huerotateval = huerotate.value;
+      let sepiaval = sepia.value;
+      let resizeval = resize.value;
+      let brightnessval = brightness.value;
+      let saturationval = saturation.value;
+      let invertval = invert.value;
+
+      // console.log("resize value is", resizeval)
+
+      // targetimage.style.filter = 'grayscale(' + gsval + '%) blur(' + blurval + 'px) hue-rotate(' + huerotateval + 'deg) sepia(' + sepiaval + '%)';
+      // targetimage.style.filter = `grayscale(${gsval}%) blur(${blurval}px) hue-rotate(${huerotateval}deg) sepia(${sepiaval}%)`;
+      // targetimage.style.filter = `
+      // grayscale(${gsval}%)
+      // blur(${blurval}px)
+      // hue-rotate(${huerotateval}deg)
+      // sepia(${sepiaval}%)`;
+
+      targetimage.style.filter = `
+    grayscale(${gsval}%)
+    blur(${blurval}px)
+    hue-rotate(${huerotateval}deg)
+    sepia(${sepiaval}%)
+    brightness(${brightnessval}%)
+    saturate(${saturationval}%)
+    invert(${invertval}%)
+  `;
+
+      targetimage.style.width = `${resizeval}%`;
+      targetimage.style.height = `${resizeval}%`;
+
+    }
+
+    let sliderform = document.getElementById('slider-form');
+    sliderform.addEventListener('reset', function () {
+      sliderform.reset();
+      setTimeout(function () {
+        editimage();
+      }, 0)
+    })
+
+
+  </script>
+</body>
+
+</html>
